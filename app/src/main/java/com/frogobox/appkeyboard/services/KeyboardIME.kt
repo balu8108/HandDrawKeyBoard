@@ -14,6 +14,7 @@ import com.frogobox.appkeyboard.model.KeyboardFeature
 import com.frogobox.appkeyboard.model.KeyboardFeatureType
 import com.frogobox.appkeyboard.ui.main.MainActivity
 import com.frogobox.libkeyboard.common.core.BaseKeyboardIME
+import com.frogobox.libkeyboard.ui.main.StrokeManager
 import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
 import com.frogobox.recycler.core.IFrogoBindingAdapter
 import com.frogobox.recycler.ext.injectorBinding
@@ -22,30 +23,30 @@ import com.frogobox.sdk.ext.invisible
 import com.frogobox.sdk.ext.visible
 
 
-class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>() {
+class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>(), StrokeManager.ContentChangedListener {
 
     override fun setupViewBinding(): KeyboardImeBinding {
         return KeyboardImeBinding.inflate(LayoutInflater.from(this), null, false)
     }
 
     override fun initialSetupKeyboard() {
-        binding?.keyboardMain?.setKeyboard(keyboard!!)
-        binding?.mockMeasureHeightKeyboardMain?.setKeyboard(keyboard!!)
+        //binding?.keyboardMain?.setKeyboard(keyboard!!)
+        //binding?.mockMeasureHeightKeyboardMain?.setKeyboard(keyboard!!)
     }
 
     override fun setupBinding() {
         initialSetupKeyboard()
-        binding?.keyboardMain?.mOnKeyboardActionListener = this
-        binding?.keyboardEmoji?.mOnKeyboardActionListener = this
+        //binding?.keyboardMain?.mOnKeyboardActionListener = this
+        //binding?.keyboardEmoji?.mOnKeyboardActionListener = this
     }
 
     override fun invalidateKeyboard() {
-        binding?.keyboardAutotext?.setupData()
+        //binding?.keyboardAutotext?.setupData()
         setupFeatureKeyboard()
     }
 
     override fun initCurrentInputConnection() {
-        binding?.apply {
+        /*binding?.apply {
             keyboardAutotext.setInputConnection(currentInputConnection)
             keyboardNews.setInputConnection(currentInputConnection)
             keyboardMoview.setInputConnection(currentInputConnection)
@@ -53,22 +54,22 @@ class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>() {
             keyboardForm.setInputConnection(currentInputConnection)
             keyboardEmoji.setInputConnection(currentInputConnection)
             keyboardTemplateText.setInputConnection(currentInputConnection)
-        }
+        }*/
     }
 
     override fun hideMainKeyboard() {
         binding?.apply {
             keyboardMain.gone()
-            keyboardHeader.gone()
-            mockMeasureHeightKeyboard.invisible()
+            //keyboardHeader.gone()
+            //mockMeasureHeightKeyboard.invisible()
         }
     }
 
     override fun showMainKeyboard() {
         binding?.apply {
             keyboardMain.visible()
-            mockMeasureHeightKeyboard.gone()
-            if (KeyboardUtil().menuKeyboard().isEmpty()) {
+            //mockMeasureHeightKeyboard.gone()
+            /*if (KeyboardUtil().menuKeyboard().isEmpty()) {
                 keyboardHeader.gone()
             } else {
                 keyboardHeader.visible()
@@ -79,7 +80,7 @@ class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>() {
             keyboardWebview.gone()
             keyboardForm.gone()
             keyboardEmoji.gone()
-            keyboardEmoji.binding?.emojiList?.scrollToPosition(0)
+            keyboardEmoji.binding?.emojiList?.scrollToPosition(0)*/
         }
     }
 
@@ -103,7 +104,7 @@ class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>() {
     }
 
     override fun initBackToMainKeyboard() {
-        binding?.apply {
+        /*binding?.apply {
             keyboardAutotext.binding?.toolbarBack?.setOnClickListener {
                 keyboardAutotext.gone()
                 showMainKeyboard()
@@ -140,7 +141,7 @@ class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>() {
                 showMainKeyboard()
             }
 
-        }
+        }*/
     }
 
     override fun setupFeatureKeyboard() {
@@ -153,7 +154,7 @@ class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>() {
             maxMenu + 1
         }
 
-        binding?.apply {
+        /*binding?.apply {
             if (KeyboardUtil().menuKeyboard().isEmpty()) {
                 keyboardHeader.gone()
                 mockKeyboardHeader.gone()
@@ -290,27 +291,36 @@ class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>() {
                     .createLayoutGrid(gridSize)
                     .build()
             }
-        }
+        }*/
     }
 
     override fun initView() {
         setupFeatureKeyboard()
         initBackToMainKeyboard()
+        binding?.clearBtn?.setOnClickListener {
+            binding?.keyboardMain?.clear()
+        }
+
+        binding?.keyboardMain?.strokeManager?.setContentChangedListener(this)
     }
 
     override fun invalidateAllKeys() {
-        binding?.keyboardMain?.invalidateAllKeys()
+        //binding?.keyboardMain?.invalidateAllKeys()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun runEmojiBoard() {
-        binding?.keyboardEmoji?.visible()
+        //binding?.keyboardEmoji?.visible()
         hideMainKeyboard()
-        binding?.keyboardEmoji?.openEmojiPalette()
+        //binding?.keyboardEmoji?.openEmojiPalette()
     }
 
     override fun getKeyboardLayoutXML(): Int {
         return baseContext.getKeyboardType()
+    }
+
+    override fun onContentChanged(result: String) {
+        binding?.result?.text = result
     }
 
 }

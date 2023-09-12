@@ -53,6 +53,8 @@ dependencies {
 
     api(Androidx.emoji2)
 
+    implementation("com.google.mlkit:digital-ink-recognition:18.1.0")
+
 }
 
 afterEvaluate {

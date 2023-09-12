@@ -51,6 +51,7 @@ class MainKeyboard @JvmOverloads constructor(
 
     private var mKeyboard: ItemMainKeyboard? = null
     private var mCurrentKeyIndex: Int = NOT_A_KEY
+    private var drawingView: DrawingView? = null
 
     private var mLabelTextSize = 0
     private var mKeyTextSize = 0
@@ -177,6 +178,7 @@ class MainKeyboard @JvmOverloads constructor(
         mPrimaryColor = context.getProperPrimaryColor()
 
         mPreviewPopup = PopupWindow(context)
+        drawingView = DrawingView(context)
         mPreviewText = inflater.inflate(resources.getLayout(R.layout.item_keyboard_main), null) as TextView
         mPreviewTextSizeLarge = context.resources.getDimension(R.dimen.preview_text_size).toInt()
         mPreviewPopup.contentView = mPreviewText
