@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicBoolean
 /** Task to run asynchronously to obtain recognition results.  */
 class RecognitionTask(private val recognizer: DigitalInkRecognizer?, private val ink: Ink) {
   private var currentResult: RecognizedInk? = null
-  private val cancelled: AtomicBoolean
-  private val done: AtomicBoolean
-  var result: String? = null
+  private val cancelled: AtomicBoolean = AtomicBoolean(false)
+  private val done: AtomicBoolean = AtomicBoolean(false)
+  private var result: String? = null
   fun cancel() {
     cancelled.set(true)
   }
@@ -63,8 +63,4 @@ class RecognitionTask(private val recognizer: DigitalInkRecognizer?, private val
     private const val TAG = "MLKD.RecognitionTask"
   }
 
-  init {
-    cancelled = AtomicBoolean(false)
-    done = AtomicBoolean(false)
-  }
 }

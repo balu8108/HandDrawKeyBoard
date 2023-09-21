@@ -1,7 +1,6 @@
 package com.frogobox.appkeyboard.ui.detail
 
 import com.frogobox.appkeyboard.common.base.BaseViewModel
-import com.frogobox.appkeyboard.repository.autotext.AutoTextRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: AutoTextRepository
 ): BaseViewModel() {
 
 

@@ -1,25 +1,14 @@
 package com.frogobox.appkeyboard.services
 
-import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import com.frogobox.appkeyboard.common.ext.getKeyboardType
-import com.frogobox.appkeyboard.databinding.ItemKeyboardHeaderBinding
 import com.frogobox.appkeyboard.databinding.KeyboardImeBinding
-import com.frogobox.appkeyboard.model.KeyboardFeature
-import com.frogobox.appkeyboard.model.KeyboardFeatureType
-import com.frogobox.appkeyboard.ui.main.MainActivity
 import com.frogobox.libkeyboard.common.core.BaseKeyboardIME
 import com.frogobox.libkeyboard.ui.main.StrokeManager
-import com.frogobox.recycler.core.FrogoRecyclerNotifyListener
-import com.frogobox.recycler.core.IFrogoBindingAdapter
-import com.frogobox.recycler.ext.injectorBinding
 import com.frogobox.sdk.ext.gone
-import com.frogobox.sdk.ext.invisible
 import com.frogobox.sdk.ext.visible
 
 
@@ -145,14 +134,14 @@ class KeyboardIME : BaseKeyboardIME<KeyboardImeBinding>(), StrokeManager.Content
     }
 
     override fun setupFeatureKeyboard() {
-        val maxMenu = 4
-        val gridSize = if (KeyboardUtil().menuKeyboard().size <= maxMenu) {
+        //val maxMenu = 4
+        /*val gridSize = if (KeyboardUtil().menuKeyboard().size <= maxMenu) {
             KeyboardUtil().menuKeyboard().size
         } else if (KeyboardUtil().menuKeyboard().size.mod(maxMenu) == 0) {
             maxMenu
         } else {
             maxMenu + 1
-        }
+        }*/
 
         /*binding?.apply {
             if (KeyboardUtil().menuKeyboard().isEmpty()) {

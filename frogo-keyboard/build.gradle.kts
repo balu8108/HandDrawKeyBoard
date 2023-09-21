@@ -50,7 +50,6 @@ dependencies {
     api(DependencyGradle.FROGO_SDK)
     api(DependencyGradle.FROGO_UI)
     api(DependencyGradle.FROGO_RECYCLER_VIEW)
-
     api(Androidx.emoji2)
 
     implementation("com.google.mlkit:digital-ink-recognition:18.1.0")

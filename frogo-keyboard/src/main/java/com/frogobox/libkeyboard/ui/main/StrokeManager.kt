@@ -35,11 +35,10 @@ class StrokeManager {
   // For handling recognition and model downloading.
   private var recognitionTask: RecognitionTask? = null
 
-  var modelManager: ModelManager
+  private var modelManager: ModelManager = ModelManager()
 
   init {
-    modelManager = ModelManager()
-      setActiveModel("en-US")
+    setActiveModel("en-US")
       download()
   }
 

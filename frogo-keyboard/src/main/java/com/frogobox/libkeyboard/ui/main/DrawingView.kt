@@ -29,7 +29,7 @@ class DrawingView @JvmOverloads constructor(
   View(context, attributeSet), StrokeManager.ContentChangedListener {
   private val recognizedStrokePaint: Paint
   private val textPaint: TextPaint
-  private val currentStrokePaint: Paint
+  private val currentStrokePaint: Paint = Paint()
   private val canvasPaint: Paint
   private val currentStroke: Path
   private lateinit var drawCanvas: Canvas
@@ -48,7 +48,7 @@ class DrawingView @JvmOverloads constructor(
     invalidate()
   }
 
-  fun redrawContent() {
+  private fun redrawContent() {
     clear()
     val currentInk = strokeManager.currentInk
     drawInk(currentInk, currentStrokePaint)
@@ -93,7 +93,7 @@ class DrawingView @JvmOverloads constructor(
 
   private fun drawStroke(s: Stroke, paint: Paint) {
     Log.i(TAG, "drawstroke")
-    var path: Path = Path()
+    val path = Path()
     path.moveTo(s.points[0].x, s.points[0].y)
     for (p in s.points.drop(1)) {
       path.lineTo(p.x, p.y)
@@ -184,7 +184,6 @@ class DrawingView @JvmOverloads constructor(
   }
 
   init {
-    currentStrokePaint = Paint()
     currentStrokePaint.color = -0xff01 // pink.
     currentStrokePaint.isAntiAlias = true
     // Set stroke width based on display density.
